@@ -9,8 +9,8 @@
     "ghpages": "ghpages"
   },
   "repository" : { 
-    "type" : "git"
-  , "url" : "https://github.com/Yoann-M/yoann-m.github.io"
+    "type" : "git",
+    "url" : "https://github.com/Yoann-M/yoann-m.github.io"
   },    
   "devDependencies": {
     "budo": "^7.0.0",
