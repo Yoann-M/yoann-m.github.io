@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+  <title>My A-Frame Scene</title>
+  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script> 
+
+    <script>
+ AFRAME.registerComponent('linker', {
+  schema: {default: ''},
+
+  init: function () {
+    var url = this.data;
+    this.el.addEventListener('click', function () {
+    window.location.href = url;
+ });
+}
+ });    </script>
+</head>
+ 
+<body>
+
+    <a-scene>
+
+<a-camera position="-1 0 7" look-controls wasd-controls>
+ <a-cursor color="blue" fuse="true" timeout="2"></a-cursor>
+</a-camera>
+
+<a-light type="ambient" color="#fff"></a-light>
+<a-light type="hemisphere" groundColor="#ddd;" color="#fff" intensity="1.0" position="0 10 5" ></a-light>
+
+<a-text position="0 2 2" color="#fff" align="center" value="WASD Keys moves you on desktop.\n\nMove circle mouse pointer to red ball and wait a few seconds." width="4"></a-text>
+
+
+<a-sphere color="red" radius="1" position="-4 2 0" link="http://localhost:8888/yoann-m.github.io"></a-sphere>
+ 
+  <a-plane color="black" rotation="-90 0 0" width="30" height="30"></a-plane>
+  <a-sky color="#111"></a-sky>
+ </a-scene>
+
+
+</body>
+</html>
