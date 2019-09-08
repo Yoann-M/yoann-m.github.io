@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <title>A-Frame - 3D Model</title>
+    <meta name="description" content="Try A-Frame - load an external 3D model">
+    <!-- This turns our HTML into A-Frame! -->
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script>
+        AFRAME.registerComponent('play-all-model-animations', {
+            init: function () {
+                this.model = null;
+                this.mixer = null;
+
+                var model = this.el.getObject3D('mesh');
+                if (model) {
+                    this.load(model);
+                } else {
+                    this.el.addEventListener('model-loaded', function (e) {
+                        this.load(e.detail.model);
+                    }.bind(this));
+                }
+            },
+
+            load: function (model) {
+                this.model = model;
+                this.mixer = new THREE.AnimationMixer(model);
+                this.model.animations.forEach(animation => {
+                    this.mixer.clipAction(animation, model).play();
+                });
+            },
+
+            tick: function (t, dt) {
+                if (this.mixer && !isNaN(dt)) {
+                    this.mixer.update(dt / 1000);
+                }
+            }
+        });
+
+        AFRAME.registerComponent('modify-materials', {
+            init: function () {
+                // Wait for model to load.
+                this.el.addEventListener('model-loaded', () => {
+                    // Grab the mesh / scene.
+                    const obj = this.el.getObject3D('mesh');
+                    // Go over the submeshes and modify materials we want.
+                    obj.traverse(node => {
+                        if (node.name.indexOf('ship') !== -1) {
+                            node.material.color.set('yellow');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <a-scene background="color: #ECECEC">
+        <a-assets>
+            <a-asset-item id="cityModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf">
+            </a-asset-item>
+        </a-assets>
+        <a-entity gltf-model="#cityModel" play-all-model-animations modify-materials></a-entity>
+    </a-scene>
+</body>
+
+</html>

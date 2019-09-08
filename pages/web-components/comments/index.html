@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tutorial 1 - Autonomous Web Component</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <!-- The template used for the custom element -->
+    <template id="user-comment-template">
+      <!-- Styles will be scoped inside the shadow DOM -->
+      <style>
+        .container {
+          align-items: center;
+          display: flex;
+          max-width: 100%;
+          padding: 0.5rem;
+        }
+
+        .avatar-container {
+          background: lightgray;
+          border-radius: 100%;
+          height: 3rem;
+          margin-right: 0.5rem;
+          overflow: hidden;
+          width: 3rem;
+        }
+
+        /* Style the image directly - either the slotted one or the default */
+        slot[name="avatar"]::slotted(img),
+        slot[name="avatar"] img {
+          max-width: 100%;
+        }
+
+        slot[name="username"],
+        slot[name="comment"] {
+          display: block;
+        }
+
+        slot[name="username"] {
+          font-weight: bold;
+          margin-bottom: 0.25rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .comment {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .unknown {
+          opacity: 0.5;
+        }
+      </style>
+
+      <!-- The contents of the web component -->
+      <div class="container">
+        <div class="avatar-container">
+          <slot name="avatar">
+            <!-- Placeholder content when there is no data for the slot -->
+            <img alt="" src="https://picsum.photos/g/100?random" />
+          </slot>
+        </div>
+        <div class="comment">
+          <slot name="username">
+            <!-- Placeholder content when there is no data for the slot -->
+            <span class="unknown">No name</span>
+          </slot>
+          <slot name="comment">
+            <!-- Placeholder content when there is no data for the slot -->
+            <span class="unknown">This user did not leave a comment</span>
+          </slot>
+        </div>
+      </div>
+    </template>
+
+    <!-- How to use the new user-comment element -->
+    <user-comment>
+      <img alt="" slot="avatar" src="https://picsum.photos/100?random" />
+      <span slot="username">Matt Crouch</span>
+      <div slot="comment">
+        This is an example of a comment a user might leave
+      </div>
+    </user-comment>
+
+    <!-- What happens if the developer does not pass values to a slot -->
+    <user-comment>
+      <!-- Default values -->
+    </user-comment>
+  </body>
+</html>

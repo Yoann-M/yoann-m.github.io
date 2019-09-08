@@ -1,41 +1,145 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
-    <script src="https://unpkg.com/aframe-gradient-sky@1.0.4/dist/gradientsky.min.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yoann M - Github.io</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
+    <!-- components -->
+    <script defer src="components/topbar.js"></script>
+</head>
+
+<body>
+    <div class="uk-navbar-container">
+        <div class="uk-container uk-container-expand uk-background-primary">
+            <nav class="uk-navbar uk-light" uk-navbar>
+                <div class="uk-navbar-left">
+                    <a href="" class="uk-navbar-item uk-logo">
+                        <svg height="32" class="uk-light" viewBox="0 0 16 16" style="fill:white" version="1.1"
+                            width="32" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <li>Yoann M</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="uk-section">
+        <div class="uk-container uk-container-expand">
+            <div class="uk-child-width-1-3@s uk-grid-medium" uk-grid>
+                <div>
+                    <h3>A Frame</h3>
+                    <ul id="aframe-list" class="uk-list">
+                    </ul>
+                </div>
+                <div>
+                    <h3>A Frame with AR</h3>
+                    <ul id="aframe-ar-list" class="uk-list">
+                    </ul>
+                </div>
+                <div>
+                    <h3>Web Components</h3>
+                    <ul id="web-components-list" class="uk-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 
+    <top-bar>
+        <span slot="title">Matt Crouch</span>
+    </top-bar> -->
     <script>
-        AFRAME.registerComponent('log', {
-          schema: {type: 'string'},
-          init: function () {
-            var stringToLog = this.data;
-            console.log(stringToLog);
-          }
-        });
-      </script>
-  </head>
-  <body>
+        const aframeList = document.querySelector("#aframe-list");
+        const array1 = [{
+                label: 'A Frame - Components',
+                link: 'pages/aframe/components.html'
+            },
+            {
+                label: 'A Frame - Events',
+                link: 'pages/aframe/entity-event.html'
+            },
+            {
+                label: 'A Frame - Loop',
+                link: 'pages/aframe/entity-loop.html'
+            },
+            {
+                label: 'A Frame - Solar System',
+                link: 'pages/aframe/solar-system.html'
+            },
+            {
+                label: 'A Frame - 3D Model',
+                link: 'pages/aframe/load-model.html'
+            },
+            {
+                label: 'A Frame - Panorama 360',
+                link: 'pages/aframe/panorama-360.html'
+            },
+            {
+                label: 'A Frame - Water',
+                link: 'pages/aframe/water.html'
+            },
+        ]
+        for (let i = 0; i < array1.length; i++) {
+            const element = array1[i];
+            const li = document.createElement("li");
+            li.innerHTML = `
+            <a class="uk-link-text" href="${array1[i].link}" target="_blank">${array1[i].label}</a>
+            `;
+            aframeList.appendChild(li);
+        }
+        // -----------
+        const aframeArList = document.querySelector("#aframe-ar-list");
+        const array2 = [{
+                label: 'A Frame AR - Download Hiro Pdf',
+                link: 'pages/aframe-ar/pattern/hiro-pattern-with-border.pdf'
+            },
+            {
+                label: 'A Frame AR - Hiro box',
+                link: 'pages/aframe-ar/hiro-box.html'
+            }
+        ]
+        for (let i = 0; i < array2.length; i++) {
+            const element = array2[i];
+            const li = document.createElement("li");
+            li.innerHTML = `
+            <a class="uk-link-text" href="${array2[i].link}" target="_blank">${array2[i].label}</a>
+            `;
+            aframeArList.appendChild(li);
+        }
+        // -----------
+        const webComponentsList = document.querySelector("#web-components-list");
+        const array3 = [{
+                label: 'Web components - Comments',
+                link: 'pages/web-components/comments'
+            },
+            {
+                label: 'Test',
+                link: 'pages/web-components/'
+            }
+        ]
+        for (let i = 0; i < array3.length; i++) {
+            const element = array3[i];
+            const li = document.createElement("li");
+            li.innerHTML = `
+            <a class="uk-link-text" href="${array3[i].link}" target="_blank">${array3[i].label}</a>
+            `;
+            webComponentsList.appendChild(li);
+        }
+    </script>
+</body>
 
-     <a-scene log="Hello, Scene!">
-      <a-entity  log="Hello, Box!" id="rain" particle-system="preset: snow; color: #ffffff; particleCount: 8000; duration: 0"></a-entity>
-      <a-entity id="sphere" geometry="primitive: sphere"
-                material="color: #EFEFEF; shader: flat"
-                position="0 0.15 -5"
-                light="type: point; intensity: 5"
-                animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 -0.10 -5; loop: true"></a-entity>
-      <a-entity id="ocean" ocean="density: 20; width: 50; depth: 50; speed: 4"
-                material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1"
-                rotation="-90 0 0"></a-entity>
-      <a-entity id="sky" geometry="primitive: sphere; radius: 5000"
-                material="shader: gradient; topColor: 235 235 245; bottomColor: 185 185 210"
-                scale="-1 1 1"></a-entity>
-      <a-entity id="light" light="type: ambient; color: #888"></a-entity>
-    </a-scene>
-
-  </body>
 </html>

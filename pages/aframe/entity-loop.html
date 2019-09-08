@@ -3,6 +3,7 @@
 
 <head>
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
     <script src="scripts/mybox-component.js"></script>
 </head>
 
@@ -10,8 +11,10 @@
     <a-scene scene-ready>
         <a-entity log="message: Hello, Metaverse!"></a-entity>
         <a-entity box="width: 0.5; height: 0.5; depth: 1; color: orange" position="0 2 -5"></a-entity>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
+        <!-- <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        <a-sky color="#ECECEC"></a-sky> -->
+        <!-- Out of the box environment! -->
+        <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
     </a-scene>
     <script>
         var sceneEl = document.querySelector('a-scene');
@@ -25,7 +28,11 @@
                 depth: 1,
                 color: 'red',
             });
-            entityEl.setAttribute('position', {x: i, y: i, z: -i-3});
+            entityEl.setAttribute('position', {
+                x: i,
+                y: i,
+                z: -i - 3
+            });
             sceneEl.appendChild(entityEl);
         }
 
@@ -38,7 +45,11 @@
                 depth: 1,
                 color: 'red',
             });
-            entityEl.setAttribute('position', {x: -i, y: i, z: -i-3});
+            entityEl.setAttribute('position', {
+                x: -i,
+                y: i,
+                z: -i - 3
+            });
             sceneEl.appendChild(entityEl);
         }
     </script>
